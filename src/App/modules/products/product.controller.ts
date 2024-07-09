@@ -1,21 +1,26 @@
 import { Request, Response } from 'express';
 import { productServices } from './product.service';
+import { sendResponse } from '../../utils/sendResponse';
+import { catchAsync } from '../../utils/catchAsync';
 
-const createProductIntoDb = async (req: Request, res: Response) => {
-  try {
-    const result = await productServices.createProduct(req.body);
-    return res.status(200).json({
-      success: true,
-      message: 'Product Created successfully!',
-      data: result,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: true,
-      message: 'Failed to create product!',
-      error,
-    });
-  }
-};
+const createProductIntoDb = catchAsync(async (req: Request, res: Response) => {
+  const result = await productServices.createProduct(req.body);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Product Created successfully!',
+    data: result,
+  });
+});
 
-export const productController = { createProductIntoDb };
+const getAllProductsFromDb = catchAsync(async (req: Request, res: Response) => {
+  const result = await productServices.allProducts();
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'All Product fetch successfully!',
+    data: result,
+  });
+});
+
+export const productController = { createProductIntoDb, getAllProductsFromDb };
