@@ -9,13 +9,13 @@
 
 ## About the Project
 
-Our goal is to build a modern, user-friendly e-commerce site for mechanical keyboards using React, Redux, Mongoose, and Express. Features include seamless browsing, detailed product pages, a smooth cart system, fast search, and secure Stripe payments. We aim to deliver an exceptional shopping experience for keyboard enthusiasts.
+Our goal is to build a modern, product-friendly e-commerce site for mechanical keyboards using React, Redux, Mongoose, and Express. Features include seamless browsing, detailed product pages, a smooth cart system, fast search, and secure Stripe payments. We aim to deliver an exceptional shopping experience for keyboard enthusiasts.
 
 ## Features
 
 ### Validation and Error Handling
 
-- **Validation**: : Ensure non-overlapping slots, valid room details, and user inputs.
+- **Validation**: : Ensure non-overlapping slots, valid room details, and product inputs.
 - **Error Handling**: Provide informative error messages for conflicts and validation issues.
 
 ## Technology Stack
