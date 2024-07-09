@@ -8,6 +8,9 @@ const productZodValidationSchema = z.object({
     brand: z.string({
       message: 'Brand is required.',
     }),
+    description: z.string({
+      message: 'Description is required.',
+    }),
     image: z.string().url({
       message: 'Image must be a valid URL.',
     }),
