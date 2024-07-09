@@ -20,7 +20,7 @@ export const productSchema = new Schema<TProduct>(
       required: true,
     },
     availableQuantity: {
-      textype: Number,
+      type: Number,
       required: true,
     },
     price: {
