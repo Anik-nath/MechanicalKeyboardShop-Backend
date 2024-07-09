@@ -5,7 +5,7 @@ export const router = Router();
 
 const allRoutes = [
   {
-    path: '',
+    path: '/product',
     route: productRoutes,
   },
 ];
