@@ -12,5 +12,25 @@ const getItemsFromCart = async () => {
   const result = await Cart.find().populate('cartItems.productId');
   return result;
 };
+//  get single cart items
+const getSingleItemsFromCart = async (id: string) => {
+  const result = await Cart.find({ _id: id }).populate('cartItems.productId');
+  return result;
+};
 
-export const cartServices = { addIntoCart, getItemsFromCart };
+// Get items from cart
+const removeItemsFromCart = async (cartId: string, itemId: string) => {
+  const result = await Cart.findOneAndUpdate(
+    { _id: cartId },
+    { $pull: { cartItems: { _id: itemId } } },
+    { new: true },
+  );
+  return result;
+};
+
+export const cartServices = {
+  addIntoCart,
+  getItemsFromCart,
+  getSingleItemsFromCart,
+  removeItemsFromCart,
+};

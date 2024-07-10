@@ -23,4 +23,33 @@ const getCartItemsFromDb = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-export const cartController = { addCartIntoDb, getCartItemsFromDb };
+const getSingleCartFromDb = catchAsync(async (req: Request, res: Response) => {
+  const { cartId } = req.params;
+  const result = await cartServices.getSingleItemsFromCart(cartId);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Cart products fetched successfully!',
+    data: result,
+  });
+});
+
+const removeCartItemsFromDb = catchAsync(
+  async (req: Request, res: Response) => {
+    const { cartId, itemId } = req.params;
+    const result = await cartServices.removeItemsFromCart(cartId, itemId);
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: 'Cart products remove successfully!',
+      data: result,
+    });
+  },
+);
+
+export const cartController = {
+  addCartIntoDb,
+  getCartItemsFromDb,
+  getSingleCartFromDb,
+  removeCartItemsFromDb,
+};

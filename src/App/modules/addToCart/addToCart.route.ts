@@ -11,5 +11,7 @@ router.post(
   cartController.addCartIntoDb,
 );
 router.get('/', cartController.getCartItemsFromDb);
+router.get('/:cartId', cartController.getSingleCartFromDb);
+router.delete('/:cartId/item/:itemId', cartController.removeCartItemsFromDb);
 
 export const cartRoutes = router;
