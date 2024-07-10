@@ -17,6 +17,10 @@ const cartItemDetailsSchema = new Schema<ICartDetails>({
 export const cartItemsSchema = new Schema<ICartItems>(
   {
     cartItems: [cartItemDetailsSchema],
+    totalPrice: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true, versionKey: false },
 );
