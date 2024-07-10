@@ -1,10 +1,42 @@
-import { ICartItems } from './addToCart.interface';
+import { Types } from 'mongoose';
 import Cart from './addToCart.model';
+import Product from '../products/product.model';
 
-// Add into cart
-const addIntoCart = async (payload: ICartItems) => {
-  const result = await Cart.create(payload);
-  return result;
+const addIntoCart = async (
+  productId: Types.ObjectId,
+  productQuantity: number,
+) => {
+  let cart = await Cart.findOne();
+  if (!cart) {
+    cart = await Cart.create({ cartItems: [{ productId, productQuantity }] });
+  } else {
+    const existingItemIndex = cart.cartItems.findIndex((item) =>
+      item.productId.equals(productId),
+    );
+    // duplicate item not added just update quantity
+    if (existingItemIndex !== -1) {
+      cart.cartItems[existingItemIndex].productQuantity += productQuantity;
+    } else {
+      cart.cartItems.push({ productId, productQuantity });
+    }
+  }
+
+  // Product exist or not
+  const product = await Product.findById(productId);
+  if (!product) {
+    throw new Error(`Product is not found!`);
+  }
+  // check Insufficient
+  if (product.availableQuantity < productQuantity) {
+    throw new Error(`Insufficient quantity available!`);
+  }
+  // Reduce availableQuantity
+  product.availableQuantity -= productQuantity;
+  await product.save();
+
+  await cart.save();
+
+  return cart;
 };
 
 // Get items from cart
