@@ -36,7 +36,6 @@ const addIntoCart = async (
     }
     totalPrice += item.productQuantity * itemProduct.price;
   }
-
   // check Insufficient
   if (product.availableQuantity < productQuantity) {
     throw new Error(`Insufficient quantity available!`);
