@@ -3,7 +3,7 @@ import { Schema } from 'mongoose';
 const cartItemDetailsSchema = new Schema({
   productId: {
     type: Schema.Types.ObjectId,
-    ref: 'product',
+    ref: 'Product',
     required: true,
   },
   productQuantity: {
@@ -12,10 +12,10 @@ const cartItemDetailsSchema = new Schema({
     default: 0,
   },
 });
-const cartItemsSchema = new Schema(
+
+export const cartItemsSchema = new Schema(
   {
     cartItems: [cartItemDetailsSchema],
   },
   { timestamps: true, versionKey: false },
 );
-export default cartItemsSchema;

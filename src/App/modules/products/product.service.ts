@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TProduct } from './product.interface';
-import product from './product.model';
+import Product from './product.model';
 
 // create a product
 const createProduct = async (payload: TProduct) => {
-  const result = await product.create(payload);
+  const result = await Product.create(payload);
   return result;
 };
 // get all product
 const allProducts = async () => {
-  const result = await product.find();
+  const result = await Product.find();
   return result;
 };
 // search product by title and brand
@@ -34,17 +34,17 @@ const getProductBySearch = async (
   const sortedProduct: any = sortByPrice
     ? { price: sortByPrice === 'asc' ? 1 : -1 }
     : {};
-  const result = await product.find(filter).sort(sortedProduct);
+  const result = await Product.find(filter).sort(sortedProduct);
   return result;
 };
 // get all product
 const singleProduct = async (id: string) => {
-  const result = await product.find({ _id: id });
+  const result = await Product.find({ _id: id });
   return result;
 };
 // get all product
 const deleteProduct = async (id: string) => {
-  const result = await product.findByIdAndUpdate(
+  const result = await Product.findByIdAndUpdate(
     { _id: id },
     { isDeleted: true },
     { new: true },
@@ -53,7 +53,7 @@ const deleteProduct = async (id: string) => {
 };
 // get all product
 const UpdateProduct = async (id: string, payload: Partial<TProduct>) => {
-  const result = await product.findByIdAndUpdate({ _id: id }, payload, {
+  const result = await Product.findByIdAndUpdate({ _id: id }, payload, {
     new: true,
   });
   return result;

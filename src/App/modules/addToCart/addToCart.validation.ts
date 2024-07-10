@@ -1,12 +1,17 @@
 import { z } from 'zod';
 
 const cartItemDetailsSchema = z.object({
-  productId: z.string(),
-  productQuantity: z.number().int().default(0),
+  productId: z.string({ message: 'Product id is not valid' }),
+  productQuantity: z
+    .number({ message: 'Quantity must be a number' })
+    .int()
+    .default(0),
 });
 
 const cartItemsValidationSchema = z.object({
-  cartItems: z.array(cartItemDetailsSchema),
+  body: z.object({
+    cartItems: z.array(cartItemDetailsSchema),
+  }),
 });
 
 export const cartValidation = { cartItemsValidationSchema };
